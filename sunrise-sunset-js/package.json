@@ -1,0 +1,77 @@
+{
+  "_from": "sunrise-sunset-js",
+  "_id": "sunrise-sunset-js@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-iK3HRqnGuVTm+qhInQ+L8mSCcr678OFozGf128+8DXcEEn69tchrc1o+Js27TQ+/a1L3DRFBPioZhZDypOpT7Q==",
+  "_location": "/sunrise-sunset-js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "sunrise-sunset-js",
+    "name": "sunrise-sunset-js",
+    "escapedName": "sunrise-sunset-js",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/sunrise-sunset-js/-/sunrise-sunset-js-2.0.0.tgz",
+  "_shasum": "75fec3c4b57dfb22a66e61aff75025a0044afa31",
+  "_spec": "sunrise-sunset-js",
+  "_where": "C:\\Users\\rosew\\Documents\\College\\Computer Science\\p5\\p5\\node_project",
+  "author": {
+    "name": "allx"
+  },
+  "bugs": {
+    "url": "https://github.com/udivankin/sunrise-sunset/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Sunrise and sunset time calculation for given coordinates",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.0.0",
+    "jest-cli": "^24.0.0",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-terser": "^4.0.3",
+    "rollup-watch": "^4.3.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "homepage": "https://github.com/udivankin/sunrise-sunset#readme",
+  "jest": {
+    "cache": false,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "keywords": [
+    "sunrise",
+    "sunset",
+    "sun",
+    "suncalc",
+    "day",
+    "events"
+  ],
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "name": "sunrise-sunset-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://udivankin@github.com/udivankin/sunrise-sunset.git"
+  },
+  "scripts": {
+    "build": "rollup -c ./rollup.config.cjs.js && rollup -c ./rollup.config.legacy.js ",
+    "test": "jest"
+  },
+  "version": "2.0.0"
+}

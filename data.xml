@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<count>
+  <value></value>
+</count>
+
+Load saved information
+   $(document).ready(function(){
+     $.ajax({
+//       type:"GET",
+//       url:"data.xml",
+//       dataType:"xml",
+//       // Run xmlParser function when data loaded
+//       success:xmlParser
+//     });
+//   });
+// }
+//
+// function xmlParser(xml) {
+//   $(xml).find("count").each(function(){
+//     // When count node is loaded
+//     $("#container").append('<div class="count">')
+//   });
+// }
+
+// Prevent scrolling on iOS
+function preventDefault(e){
+    e.preventDefault();
+}
+function disableScroll(){
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+}
+function enableScroll(){
+    document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+}
+
+if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function() {
+        tilt([event.acceleration.x * 2, event.acceleration.y * 2]);
+    }, true);
+}
