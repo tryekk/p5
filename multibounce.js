@@ -8,6 +8,7 @@ class BallPosition {
     }
     animate() {
         this.x = this.x + this.xDir;
+        this.y = this.y + this.yDir;
 
         // Bounce
         if (this.x > windowWidth) {
@@ -15,6 +16,13 @@ class BallPosition {
         }
         if (this.x == 0) {
             this.xDir = 1;
+        }
+
+        if (this.y > windowHeight) {
+            this.yDir = -1;
+        }
+        if (this.y == 0) {
+            this.yDir = 1;
         }
     }
     getX() {
