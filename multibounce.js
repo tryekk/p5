@@ -17,8 +17,8 @@ function setup() {
                 random(ballSize/2, windowHeight - (ballSize/2)),
                 ballSize,
                 ballSize,
-                random(1, 1),
-                random(1, 1),
+                random(1, 3),
+                random(1, 3),
                 collisions,
                 i
             )

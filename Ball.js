@@ -28,19 +28,23 @@ class Ball {
 
         // Bounce
         if (this.x > (windowWidth - (this.i / 2))) {
+            this.x = this.x - this.xDir;  // Prevent sticking
             this.xDir = this.xDir - (this.xDir * 2);  // Invert direction
             this.onBounce();
         }
         if (this.x <= 0 + (this.i / 2)) {
+            this.x = this.x - this.xDir;  // Prevent sticking
             this.xDir = this.xSpeed;
             this.onBounce();
         }
 
         if (this.y > (windowHeight - (this.j / 2))) {
+            this.y = this.y - this.yDir;  // Prevent sticking
             this.yDir = this.yDir - (this.yDir * 2);  // Invert direction
             this.onBounce();
         }
         if (this.y <= 0 + (this.j / 2)) {
+            this.y = this.y - this.yDir;  // Prevent sticking
             this.yDir = this.ySpeed;
             this.onBounce();
         }
@@ -58,7 +62,7 @@ class Ball {
                         // Prevent sticking
                         this.x = this.x - this.xDir;
                         this.y = this.y - this.yDir;
-                        
+
                         // Invert direction
                         if (this.xDir > 0) {
                             this.xDir = this.xDir - (this.xDir * 2);
