@@ -6,8 +6,16 @@ var ballArray = [];
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    for (let i = 0; i < 25; i++) {
-        ballArray.push(new Ball(Math.random()*windowWidth, Math.random()*windowHeight, 50, 50));
+    for (let i = 0; i < 105; i++) {
+        ballArray.push(
+            new Ball(
+                Math.random()*(windowWidth - 30),
+                Math.random()*(windowHeight - 30),
+                50,
+                50,
+                random(1, 5)
+            )
+        );
     }
 }
 
@@ -21,7 +29,7 @@ function draw() {
 
         colour = ballArray[i].getColour();
         fill(colour);
-        stroke(colour[0]+75, colour[1]+75, colour[2]+75);
+        stroke(colour[0]+35, colour[1]+35, colour[2]+35);
 
         ellipse(ballArray[i].getX(), ballArray[i].getY(), ballArray[i].getI(), ballArray[i].getJ());
     }
