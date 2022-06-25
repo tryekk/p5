@@ -9,7 +9,7 @@ class Ball {
         this.xDir = 1;
         this.yDir = 1;
 
-        this.colour = [0, 0, 0];
+        this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
     animate() {
         this.x = this.x + this.xDir;
