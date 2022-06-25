@@ -7,12 +7,14 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
 
     for (let i = 0; i < 105; i++) {
+        var ballSize = random(30, 60);
+
         ballArray.push(
             new Ball(
-                Math.random()*(windowWidth - 30),
-                Math.random()*(windowHeight - 30),
-                50,
-                50,
+                random(ballSize/2, windowWidth - (ballSize/2)),
+                random(ballSize/2, windowHeight - (ballSize/2)),
+                ballSize,
+                ballSize,
                 random(1, 5),
                 random(1, 5)
             )
@@ -23,7 +25,7 @@ function setup() {
 function draw() {
     // Set colours
     strokeWeight(4);
-    // background(20);
+    background(20);
 
     for (i in ballArray) {
         ballArray[i].animate();

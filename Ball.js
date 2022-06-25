@@ -19,20 +19,20 @@ class Ball {
         this.y = this.y + this.yDir;
 
         // Bounce
-        if (this.x > (windowWidth - (this.j / 2))) {
+        if (this.x > (windowWidth - (this.i / 2))) {
             this.xDir = this.xDir - (this.xDir * 2);  // Invert directtion
             this.onBounce();
         }
-        if (this.x <= 0 + (this.j / 2)) {
+        if (this.x <= 0 + (this.i / 2)) {
             this.xDir = this.xSpeed;
             this.onBounce();
         }
 
-        if (this.y > (windowHeight - (this.i / 2))) {
+        if (this.y > (windowHeight - (this.j / 2))) {
             this.yDir = this.yDir - (this.yDir * 2);  // Invert direction
             this.onBounce();
         }
-        if (this.y <= 0 + (this.i / 2)) {
+        if (this.y <= 0 + (this.j / 2)) {
             this.yDir = this.ySpeed;
             this.onBounce();
         }
