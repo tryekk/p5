@@ -8,17 +8,28 @@ var ballArray = [];
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
+    let x = [];
+    let y = [];
+
+    // Ball spawn points
+    for (let i = 1; i <= Math.sqrt(noOfBalls); i++) {
+        for (let j = 1; j <= Math.sqrt(noOfBalls); j++) {
+            x.push(((windowWidth - 50) / Math.sqrt(noOfBalls)) * i);
+            y.push(((windowHeight - 50) / Math.sqrt(noOfBalls)) * j);
+        }
+    }
+
     for (let i = 0; i < noOfBalls; i++) {
         var ballSize = random(50, 50);
 
         ballArray.push(
             new Ball(
-                random(ballSize/2, windowWidth - (ballSize/2)),
-                random(ballSize/2, windowHeight - (ballSize/2)),
+                x[i],
+                y[i],
                 ballSize,
                 ballSize,
-                random(1, 3),
-                random(1, 3),
+                random(1, 5),
+                random(1, 5),
                 collisions,
                 i
             )
@@ -26,22 +37,7 @@ function setup() {
     }
 
     for (let i = 0; i < noOfBalls; i++) {
-        ballArray[i].setBallArray(ballArray);
-
-        // Prevent overlapping spawn points
-        for (let j = 0; j < noOfBalls; j++) {
-            if (
-                (ballArray[i].getX() >= (ballArray[j].getX() - ballArray[j].getI())
-                && ballArray[i].getX() <= (ballArray[j].getX() + ballArray[j].getI())) &&
-                (ballArray[i].getY() >= (ballArray[j].getY() - ballArray[j].getJ())
-                && ballArray[i].getY() <= (ballArray[j].getY() + ballArray[j].getJ()))
-            ) {
-                ballArray[i].setSpawnPosition(
-                    ballArray[i].getX() + ballArray[j].getI(),
-                    ballArray[i].getY() + ballArray[j].getJ()
-                );
-            }
-        }  
+        ballArray[i].setBallArray(ballArray); 
     }
 }
 
