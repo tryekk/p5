@@ -1,8 +1,8 @@
-var noOfBalls = 100;
-var collisions = true;
+var NO_OF_BALLS = 100;
+var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var ballMaxSize = 50;
-var ballMinSize = 50;
+var BALL_MIN_SIZE = 50;
+var BALL_MAX_SIZE = 50;
 
 var ballArray = [];
 
@@ -14,29 +14,29 @@ function setup() {
     let y = [];
 
     // Ball spawn points
-    for (let i = 1; i <= Math.sqrt(noOfBalls); i++) {
-        for (let j = 1; j <= Math.sqrt(noOfBalls); j++) {
-            x.push(((windowWidth - ballMaxSize) / Math.sqrt(noOfBalls)) * i);
-            y.push(((windowHeight - ballMaxSize) / Math.sqrt(noOfBalls)) * j);
+    for (let i = 1; i <= Math.sqrt(NO_OF_BALLS); i++) {
+        for (let j = 1; j <= Math.sqrt(NO_OF_BALLS); j++) {
+            x.push(((windowWidth - BALL_MAX_SIZE) / Math.sqrt(NO_OF_BALLS)) * i);
+            y.push(((windowHeight - BALL_MAX_SIZE) / Math.sqrt(NO_OF_BALLS)) * j);
         }
     }
 
-    for (let i = 0; i < noOfBalls; i++) {
+    for (let i = 0; i < NO_OF_BALLS; i++) {
         ballArray.push(
             new Ball(
                 x[i],
                 y[i],
-                random(ballMinSize, ballMaxSize),
-                random(ballMinSize, ballMaxSize),
+                random(BALL_MIN_SIZE, BALL_MAX_SIZE),
+                random(BALL_MIN_SIZE, BALL_MAX_SIZE),
                 random(1, 5),
                 random(1, 5),
-                collisions,
+                COLLISIONS,
                 i
             )
         );
     }
 
-    for (let i = 0; i < noOfBalls; i++) {
+    for (let i = 0; i < NO_OF_BALLS; i++) {
         ballArray[i].setBallArray(ballArray); 
     }
 }
