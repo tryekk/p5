@@ -2,13 +2,13 @@ var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 
 var ballArray = [];
 
-for (let i = 0; i < 5; i++) {
-    ballArray.push(new Ball(Math.random()*200, Math.random()*200, 50, 50));
-}
-
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+
+    for (let i = 0; i < 5; i++) {
+        ballArray.push(new Ball(Math.random()*windowWidth, Math.random()*windowHeight, 50, 50));
+    }
 }
 
 function draw() {
