@@ -51,10 +51,10 @@ class Ball {
                 if (i != this.ballIndex) {
                     // Calculate distance of balls (each radius plus the other)
                     if (
-                        (this.x >= (this.ballArray[i].getX() - (this.ballArray[i].getI()))
-                        && this.x <= (this.ballArray[i].getX() + (this.ballArray[i].getI())))
-                        && (this.y >= (this.ballArray[i].getY() - (this.ballArray[i].getJ()))
-                        && this.y <= (this.ballArray[i].getY() + (this.ballArray[i].getJ())))
+                        ((this.x - this.ballArray[i].getX()) <= ((this.i / 2) + (this.ballArray[i].getI() / 2))
+                        && (this.x - this.ballArray[i].getX()) >= -((this.i / 2) + (this.ballArray[i].getI() / 2))) &&
+                        ((this.y - this.ballArray[i].getY()) <= ((this.j / 2) + (this.ballArray[i].getJ() / 2))
+                        && (this.y - this.ballArray[i].getY()) >= -((this.j / 2) + (this.ballArray[i].getJ() / 2)))
                     ) {
                         // Prevent sticking
                         this.x = this.x - this.xDir;
@@ -73,7 +73,7 @@ class Ball {
                         }
                         this.onBounce();
                     }
-                }   
+                } 
             }
         }
     }

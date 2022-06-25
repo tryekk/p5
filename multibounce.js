@@ -1,14 +1,15 @@
-var NO_OF_BALLS = 100;
+var NO_OF_BALLS = 25;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var BALL_MIN_SIZE = 50;
-var BALL_MAX_SIZE = 50;
+var BALL_MIN_SIZE = 30;
+var BALL_MAX_SIZE = 70;
 
 var ballArray = [];
 
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    background(20);
 
     let x = [];
     let y = [];
@@ -22,17 +23,17 @@ function setup() {
     }
 
     for (let i = 0; i < NO_OF_BALLS; i++) {
-        ballArray.push(
-            new Ball(
-                x[i],
-                y[i],
-                random(BALL_MIN_SIZE, BALL_MAX_SIZE),
-                random(BALL_MIN_SIZE, BALL_MAX_SIZE),
-                random(1, 5),
-                random(1, 5),
-                COLLISIONS,
-                i
-            )
+        let ballSize = random(BALL_MIN_SIZE, BALL_MAX_SIZE);
+
+        ballArray.push(new Ball(
+            x[i],
+            y[i],
+            ballSize,
+            ballSize,
+            random(1, 5),
+            random(1, 5),
+            COLLISIONS,
+            i)
         );
     }
 
@@ -50,7 +51,7 @@ function draw() {
 
         colour = ballArray[i].getColour();
         fill(colour);
-        stroke(colour[0]+35, colour[1]+35, colour[2]+35);
+        stroke(colour[0] + 35, colour[1] + 35, colour[2] + 35);
 
         ellipse(ballArray[i].getX(), ballArray[i].getY(), ballArray[i].getI(), ballArray[i].getJ());
     }
