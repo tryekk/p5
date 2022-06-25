@@ -1,6 +1,8 @@
-var noOfBalls = 25;
+var noOfBalls = 100;
 var collisions = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
+var ballMaxSize = 50;
+var ballMinSize = 50;
 
 var ballArray = [];
 
@@ -14,20 +16,18 @@ function setup() {
     // Ball spawn points
     for (let i = 1; i <= Math.sqrt(noOfBalls); i++) {
         for (let j = 1; j <= Math.sqrt(noOfBalls); j++) {
-            x.push(((windowWidth - 50) / Math.sqrt(noOfBalls)) * i);
-            y.push(((windowHeight - 50) / Math.sqrt(noOfBalls)) * j);
+            x.push(((windowWidth - ballMaxSize) / Math.sqrt(noOfBalls)) * i);
+            y.push(((windowHeight - ballMaxSize) / Math.sqrt(noOfBalls)) * j);
         }
     }
 
     for (let i = 0; i < noOfBalls; i++) {
-        var ballSize = random(50, 50);
-
         ballArray.push(
             new Ball(
                 x[i],
                 y[i],
-                ballSize,
-                ballSize,
+                random(ballMinSize, ballMaxSize),
+                random(ballMinSize, ballMaxSize),
                 random(1, 5),
                 random(1, 5),
                 collisions,
