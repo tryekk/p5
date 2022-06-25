@@ -1,41 +1,12 @@
-class BallPosition {
-    constructor() {
-        this.x = 0;
-        this.y = 0;
-
-        this.xDir = 1;
-        this.yDir = 1;
-    }
-    animate() {
-        this.x = this.x + this.xDir;
-        this.y = this.y + this.yDir;
-
-        // Bounce
-        if (this.x > windowWidth) {
-            this.xDir = -1;
-        }
-        if (this.x == 0) {
-            this.xDir = 1;
-        }
-
-        if (this.y > windowHeight) {
-            this.yDir = -1;
-        }
-        if (this.y == 0) {
-            this.yDir = 1;
-        }
-    }
-    getX() {
-        return this.x;
-    }
-    getY() {
-        return this.y;
-    }
-}
-
-
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var ball = new BallPosition();
+// var ball = new Ball(20, 30, 50, 50);
+// var ball2 = new Ball(500, 10, 60, 60);
+
+var ballArray = [];
+
+for (let i = 0; i < 5; i++) {
+    ballArray.push(new Ball(Math.random()*2000, Math.random()*2000, 50, 50));
+}
 
 
 function setup() {
@@ -49,7 +20,9 @@ function draw() {
     fill(colour);
     background(20);
 
-    ball.animate();
+    for (i in ballArray) {
+        ballArray[i].animate();
 
-    ellipse(ball.getX(), ball.getY(), 50, 50);
+        ellipse(ballArray[i].getX(), ballArray[i].getY(), ballArray[i].getI(), ballArray[i].getJ());
+    }
 }
