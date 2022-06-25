@@ -1,4 +1,4 @@
-var noOfBalls = 10;
+var noOfBalls = 25;
 var collisions = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 

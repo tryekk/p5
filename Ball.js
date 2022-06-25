@@ -48,13 +48,17 @@ class Ball {
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    // Use ball with the larger radius for collision calculation
+                    // Calculate distance of balls (each radius plus the other)
                     if (
                         (this.x >= (this.ballArray[i].getX() - (this.ballArray[i].getI()))
                         && this.x <= (this.ballArray[i].getX() + (this.ballArray[i].getI())))
                         && (this.y >= (this.ballArray[i].getY() - (this.ballArray[i].getJ()))
                         && this.y <= (this.ballArray[i].getY() + (this.ballArray[i].getJ())))
                     ) {
+                        // Prevent sticking
+                        this.x = this.x - this.xDir;
+                        this.y = this.y - this.yDir;
+                        
                         // Invert direction
                         if (this.xDir > 0) {
                             this.xDir = this.xDir - (this.xDir * 2);
