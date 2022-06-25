@@ -48,21 +48,25 @@ class Ball {
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    if (this.x >= (this.ballArray[i].getX() - (this.ballArray[i].getI() / 2)) && this.x <= (this.ballArray[i].getX() + (this.ballArray[i].getI() / 2))) {
-                        if (this.y >= (this.ballArray[i].getY() - (this.ballArray[i].getJ() / 2)) && this.y <= (this.ballArray[i].getY() + (this.ballArray[i].getJ() / 2))) {
-                            // Invert direction
-                            if (this.xDir > 0) {
-                                this.xDir = this.xDir - (this.xDir * 2);
-                            } else {
-                                this.xDir = this.xSpeed;
-                            }
-                            if (this.yDir > 0) {
-                                this.yDir = this.yDir - (this.yDir * 2);
-                            } else {
-                                this.yDir = this.ySpeed;
-                            }
-                            this.onBounce();
+                    // Use ball with the larger radius for collision calculation
+                    if (
+                        (this.x >= (this.ballArray[i].getX() - (this.ballArray[i].getI()))
+                        && this.x <= (this.ballArray[i].getX() + (this.ballArray[i].getI())))
+                        && (this.y >= (this.ballArray[i].getY() - (this.ballArray[i].getJ()))
+                        && this.y <= (this.ballArray[i].getY() + (this.ballArray[i].getJ())))
+                    ) {
+                        // Invert direction
+                        if (this.xDir > 0) {
+                            this.xDir = this.xDir - (this.xDir * 2);
+                        } else {
+                            this.xDir = this.xSpeed;
                         }
+                        if (this.yDir > 0) {
+                            this.yDir = this.yDir - (this.yDir * 2);
+                        } else {
+                            this.yDir = this.ySpeed;
+                        }
+                        this.onBounce();
                     }
                 }   
             }

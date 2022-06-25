@@ -9,7 +9,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
 
     for (let i = 0; i < noOfBalls; i++) {
-        var ballSize = random(30, 30);
+        var ballSize = random(50, 50);
 
         ballArray.push(
             new Ball(
@@ -17,8 +17,8 @@ function setup() {
                 random(ballSize/2, windowHeight - (ballSize/2)),
                 ballSize,
                 ballSize,
-                random(1, 5),
-                random(1, 5),
+                random(1, 1),
+                random(1, 1),
                 collisions,
                 i
             )
