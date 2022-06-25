@@ -13,6 +13,7 @@ function setup() {
                 Math.random()*(windowHeight - 30),
                 50,
                 50,
+                random(1, 5),
                 random(1, 5)
             )
         );

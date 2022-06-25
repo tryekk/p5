@@ -1,15 +1,16 @@
 class Ball {
-    constructor(x, y, i, j, speed) {
+    constructor(x, y, i, j, xSpeed, ySpeed) {
         this.x = x;
         this.y = y;
 
         this.i = i;
         this.j = j;
 
-        this.speed = speed;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
 
-        this.xDir = speed;
-        this.yDir = speed;
+        this.xDir = xSpeed;
+        this.yDir = ySpeed;
 
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
@@ -23,7 +24,7 @@ class Ball {
             this.onBounce();
         }
         if (this.x <= 0 + (this.j / 2)) {
-            this.xDir = this.speed;
+            this.xDir = this.xSpeed;
             this.onBounce();
         }
 
@@ -32,7 +33,7 @@ class Ball {
             this.onBounce();
         }
         if (this.y <= 0 + (this.i / 2)) {
-            this.yDir = this.speed;
+            this.yDir = this.ySpeed;
             this.onBounce();
         }
     }
