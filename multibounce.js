@@ -27,6 +27,21 @@ function setup() {
 
     for (let i = 0; i < noOfBalls; i++) {
         ballArray[i].setBallArray(ballArray);
+
+        // Prevent overlapping spawn points
+        for (let j = 0; j < noOfBalls; j++) {
+            if (
+                (ballArray[i].getX() >= (ballArray[j].getX() - ballArray[j].getI())
+                && ballArray[i].getX() <= (ballArray[j].getX() + ballArray[j].getI())) &&
+                (ballArray[i].getY() >= (ballArray[j].getY() - ballArray[j].getJ())
+                && ballArray[i].getY() <= (ballArray[j].getY() + ballArray[j].getJ()))
+            ) {
+                ballArray[i].setSpawnPosition(
+                    ballArray[i].getX() + ballArray[j].getI(),
+                    ballArray[i].getY() + ballArray[j].getJ()
+                );
+            }
+        }  
     }
 }
 

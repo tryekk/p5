@@ -19,9 +19,6 @@ class Ball {
 
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
-    setBallArray(ballArray) {
-        this.ballArray = ballArray;
-    }
     animate() {
         this.x = this.x + this.xDir;
         this.y = this.y + this.yDir;
@@ -82,6 +79,13 @@ class Ball {
     }
     onBounce() {
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
+    }
+    setBallArray(ballArray) {
+        this.ballArray = ballArray;
+    }
+    setSpawnPosition(x, y) {
+        this.x = x;
+        this.y = y;
     }
     getX() {
         return this.x;
