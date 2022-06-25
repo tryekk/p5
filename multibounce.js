@@ -24,6 +24,10 @@ function setup() {
             )
         );
     }
+
+    for (let i = 0; i < noOfBalls; i++) {
+        ballArray[i].setBallArray(ballArray);
+    }
 }
 
 function draw() {

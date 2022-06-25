@@ -1,5 +1,5 @@
 class Ball {
-    constructor(x, y, i, j, xSpeed, ySpeed, collide, ballArray, ballIndex) {
+    constructor(x, y, i, j, xSpeed, ySpeed, collide, ballIndex) {
         this.x = x;
         this.y = y;
 
@@ -11,13 +11,16 @@ class Ball {
 
         this.collide = collide;
 
-        this.ballArray = ballArray;
+        this.ballArray = [];
         this.ballIndex = ballIndex;
 
         this.xDir = xSpeed;
         this.yDir = ySpeed;
 
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
+    }
+    setBallArray(ballArray) {
+        this.ballArray = ballArray;
     }
     animate() {
         this.x = this.x + this.xDir;
@@ -43,10 +46,9 @@ class Ball {
         }
 
         if (this.collide) {
-            for (i in this.ballArray) {
-                console.log(i);
+            for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    if (this.x >= (this.ballArray[i].getX() - 25) && this.x >= (this.ballArray[i].getX() + 25)) {
+                    if (this.x >= (this.ballArray[i].getX() - 5) && this.x <= (this.ballArray[i].getX() + 5)) {
                         // Invert direction
                         if (this.xDir > 0) {
                             this.xDir = this.xDir - (this.xDir * 2);
