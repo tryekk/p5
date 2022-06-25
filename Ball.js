@@ -1,5 +1,5 @@
 class Ball {
-    constructor(x, y, i, j, xSpeed, ySpeed) {
+    constructor(x, y, i, j, xSpeed, ySpeed, collide, ballArray, ballIndex) {
         this.x = x;
         this.y = y;
 
@@ -8,6 +8,11 @@ class Ball {
 
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+
+        this.collide = collide;
+
+        this.ballArray = ballArray;
+        this.ballIndex = ballIndex;
 
         this.xDir = xSpeed;
         this.yDir = ySpeed;
@@ -20,7 +25,7 @@ class Ball {
 
         // Bounce
         if (this.x > (windowWidth - (this.i / 2))) {
-            this.xDir = this.xDir - (this.xDir * 2);  // Invert directtion
+            this.xDir = this.xDir - (this.xDir * 2);  // Invert direction
             this.onBounce();
         }
         if (this.x <= 0 + (this.i / 2)) {
@@ -35,6 +40,23 @@ class Ball {
         if (this.y <= 0 + (this.j / 2)) {
             this.yDir = this.ySpeed;
             this.onBounce();
+        }
+
+        if (this.collide) {
+            for (i in this.ballArray) {
+                console.log(i);
+                if (i != this.ballIndex) {
+                    if (this.x >= (this.ballArray[i].getX() - 25) && this.x >= (this.ballArray[i].getX() + 25)) {
+                        // Invert direction
+                        if (this.xDir > 0) {
+                            this.xDir = this.xDir - (this.xDir * 2);
+                        } else {
+                            this.xDir = this.xSpeed;
+                        }
+                        this.onBounce();
+                    }
+                }   
+            }
         }
     }
     onBounce() {

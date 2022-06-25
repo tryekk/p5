@@ -1,3 +1,5 @@
+var noOfBalls = 10;
+var collisions = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 
 var ballArray = [];
@@ -6,7 +8,7 @@ var ballArray = [];
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < noOfBalls; i++) {
         var ballSize = random(30, 100);
 
         ballArray.push(
@@ -16,14 +18,15 @@ function setup() {
                 ballSize,
                 ballSize,
                 random(1, 5),
-                random(1, 5)
+                random(1, 5),
+                collisions,
+                i
             )
         );
     }
 }
 
 function draw() {
-    // Set colours
     strokeWeight(4);
     background(20);
 
