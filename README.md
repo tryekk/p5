@@ -1,6 +1,9 @@
 # p5
-Set the .js file of choice in index.html
+Import the JS file of choice in index.html
+
+
 Recommended:
-clock.js
-bounce.js
-artwork.js
+clock.js,
+bounce.js,
+artwork.js,
+multiball.js
