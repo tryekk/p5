@@ -6,8 +6,8 @@ var ballArray = [];
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    for (let i = 0; i < 105; i++) {
-        var ballSize = random(30, 60);
+    for (let i = 0; i < 25; i++) {
+        var ballSize = random(30, 100);
 
         ballArray.push(
             new Ball(
