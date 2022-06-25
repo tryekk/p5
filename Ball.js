@@ -8,6 +8,8 @@ class Ball {
 
         this.xDir = 1;
         this.yDir = 1;
+
+        this.colour = [0, 0, 0];
     }
     animate() {
         this.x = this.x + this.xDir;
@@ -16,17 +18,24 @@ class Ball {
         // Bounce
         if (this.x > (windowWidth - (this.j/2))) {
             this.xDir = -1;
+            this.onBounce();
         }
         if (this.x <= 0 + (this.j/2)) {
             this.xDir = 1;
+            this.onBounce();
         }
 
         if (this.y > (windowHeight - (this.i/2))) {
             this.yDir = -1;
+            this.onBounce();
         }
         if (this.y <= 0 + (this.i/2)) {
             this.yDir = 1;
+            this.onBounce();
         }
+    }
+    onBounce() {
+        this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
     getX() {
         return this.x;
@@ -39,5 +48,8 @@ class Ball {
     }
     getJ() {
         return this.j;
+    }
+    getColour() {
+        return this.colour;
     }
 }
