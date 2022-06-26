@@ -54,7 +54,6 @@ class Ball {
                     //     (this.x - this.ballArray[i].getX()) - (this.y - this.ballArray[i].getY()) <= 15 &&
                     //     (this.x - this.ballArray[i].getX()) - (this.y - this.ballArray[i].getY()) >= -15
                     // ) {
-                    //     console.log('Collide!' + random(1, 256));
                     //     this.onBounce();
                     // }
 
@@ -86,8 +85,57 @@ class Ball {
             }
         }
     }
+    generateColour(h, s, v) {
+        let h_i = parseInt(h * 6);
+        let f = h * 6 - h_i;
+        let p = v * (1 - s);
+        let q = v * (1 - f * s);
+        let t = v * (1 - (1 - f) * s);
+
+        let r, g, b = 0;
+
+        if (h_i == 0) {
+            r = v;
+            g = t;
+            b = p;
+        }
+        if (h_i == 1) {
+            r = q;
+            g = v;
+            b = p;
+        }
+        if (h_i == 2) {
+            r = p;
+            g = v;
+            b = t;
+        }
+        if (h_i == 3) {
+            r = p;
+            g = q;
+            b = v;
+        }
+        if (h_i == 4) {
+            r = t;
+            g = p;
+            b = v;
+        }
+        if (h_i == 5) {
+            r = v;
+            g = p;
+            b = q;
+        }
+
+        return [(r * 256), (g * 256), (b * 256)];
+    }
     onBounce() {
-        this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
+        let goldenRatioConjugate = 0.618033988749895;
+        let h = random(0, 1);
+        h += goldenRatioConjugate;
+        h %= 1;
+        
+        this.colour = this.generateColour(h, 0.5, 0.95);
+
+        // this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
     setBallArray(ballArray) {
         this.ballArray = ballArray;

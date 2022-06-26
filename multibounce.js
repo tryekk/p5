@@ -1,8 +1,8 @@
-var NO_OF_BALLS = 36;
+var NO_OF_BALLS = 180;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var BALL_MIN_SIZE = 30;
-var BALL_MAX_SIZE = 90;
+var BALL_MIN_SIZE = 10;
+var BALL_MAX_SIZE = 60;
 
 var ballArray = [];
 
@@ -32,8 +32,8 @@ function setup() {
             // random(10, 150),
             ballSize,
             ballSize,
-            random(0.1, 2),
-            random(0.1, 2),
+            random(0.1, 1),
+            random(0.1, 1),
             COLLISIONS,
             i)
         );
@@ -56,5 +56,6 @@ function draw() {
         stroke(colour[0] + 35, colour[1] + 35, colour[2] + 35);
 
         ellipse(ballArray[i].getX(), ballArray[i].getY(), ballArray[i].getI(), ballArray[i].getJ());
+        // rect(ballArray[i].getX() - (ballArray[i].getI() / 2), ballArray[i].getY() - (ballArray[i].getJ() / 2), ballArray[i].getI(), ballArray[i].getJ());
     }
 }
