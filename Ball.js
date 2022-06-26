@@ -1,5 +1,5 @@
 class Ball {
-    constructor(x, y, i, j, xSpeed, ySpeed, collide, ballIndex) {
+    constructor(x, y, i, j, xSpeed, ySpeed, animate, collide, ballIndex) {
         this.x = x;
         this.y = y;
 
@@ -9,6 +9,7 @@ class Ball {
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
 
+        this.animate = animate;
         this.collide = collide;
 
         this.ballArray = [];
@@ -19,31 +20,33 @@ class Ball {
 
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
-    animate() {
-        this.x = this.x + this.xDir;
-        this.y = this.y + this.yDir;
-
-        // Bounce
-        if (this.x > (windowWidth - (this.i / 2))) {
-            this.x = this.x - this.xDir;  // Prevent sticking
-            this.xDir = this.xDir - (this.xDir * 2);  // Invert direction
-            this.onBounce();
-        }
-        if (this.x <= 0 + (this.i / 2)) {
-            this.x = this.x - this.xDir;  // Prevent sticking
-            this.xDir = this.xSpeed;
-            this.onBounce();
-        }
-
-        if (this.y > (windowHeight - (this.j / 2))) {
-            this.y = this.y - this.yDir;  // Prevent sticking
-            this.yDir = this.yDir - (this.yDir * 2);  // Invert direction
-            this.onBounce();
-        }
-        if (this.y <= 0 + (this.j / 2)) {
-            this.y = this.y - this.yDir;  // Prevent sticking
-            this.yDir = this.ySpeed;
-            this.onBounce();
+    animateBall() {
+        if (this.animate) {
+            this.x = this.x + this.xDir;
+            this.y = this.y + this.yDir;
+    
+            // Bounce
+            if (this.x > (windowWidth - (this.i / 2))) {
+                this.x = this.x - this.xDir;  // Prevent sticking
+                this.xDir = this.xDir - (this.xDir * 2);  // Invert direction
+                this.onBounce();
+            }
+            if (this.x <= 0 + (this.i / 2)) {
+                this.x = this.x - this.xDir;  // Prevent sticking
+                this.xDir = this.xSpeed;
+                this.onBounce();
+            }
+    
+            if (this.y > (windowHeight - (this.j / 2))) {
+                this.y = this.y - this.yDir;  // Prevent sticking
+                this.yDir = this.yDir - (this.yDir * 2);  // Invert direction
+                this.onBounce();
+            }
+            if (this.y <= 0 + (this.j / 2)) {
+                this.y = this.y - this.yDir;  // Prevent sticking
+                this.yDir = this.ySpeed;
+                this.onBounce();
+            }
         }
 
         if (this.collide) {
@@ -140,6 +143,12 @@ class Ball {
     }
     setSpawnPosition(x, y) {
         this.x = x;
+        this.y = y;
+    }
+    setX(x) {
+        this.x = x;
+    }
+    setY(y) {
         this.y = y;
     }
     getX() {

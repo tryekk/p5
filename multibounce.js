@@ -1,8 +1,9 @@
-var NO_OF_BALLS = 180;
+var NO_OF_BALLS = 360;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var BALL_MIN_SIZE = 10;
-var BALL_MAX_SIZE = 60;
+var BALL_MIN_SIZE = 5;
+var BALL_MAX_SIZE = 40;
+var CURSOR_BALL = false;
 
 var ballArray = [];
 
@@ -28,12 +29,11 @@ function setup() {
         ballArray.push(new Ball(
             x[i],
             y[i],
-            // random(10, 1500),
-            // random(10, 150),
             ballSize,
             ballSize,
             random(0.1, 1),
             random(0.1, 1),
+            true,
             COLLISIONS,
             i)
         );
@@ -42,14 +42,28 @@ function setup() {
     for (let i = 0; i < NO_OF_BALLS; i++) {
         ballArray[i].setBallArray(ballArray); 
     }
+
+    if (CURSOR_BALL) {
+        ballArray.push(new Ball(
+            mouseX,
+            mouseY,
+            40,
+            40,
+            0,
+            0,
+            false,
+            COLLISIONS,
+            ballArray.length
+        ));
+    }
 }
 
 function draw() {
     strokeWeight(4);
-    background(20);
+    background(0);
 
     for (i in ballArray) {
-        ballArray[i].animate();
+        ballArray[i].animateBall();
 
         colour = ballArray[i].getColour();
         fill(colour);
@@ -57,5 +71,12 @@ function draw() {
 
         ellipse(ballArray[i].getX(), ballArray[i].getY(), ballArray[i].getI(), ballArray[i].getJ());
         // rect(ballArray[i].getX() - (ballArray[i].getI() / 2), ballArray[i].getY() - (ballArray[i].getJ() / 2), ballArray[i].getI(), ballArray[i].getJ());
+
+        if (CURSOR_BALL) {
+            // ballArray[ballArray.length - 1].animateBall();
+            ballArray[ballArray.length - 1].setX(mouseX);
+            ballArray[ballArray.length - 1].setY(mouseY);
+            ellipse(mouseX, mouseY, 40, 40);
+        }
     }
 }
