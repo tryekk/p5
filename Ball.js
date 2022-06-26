@@ -134,8 +134,6 @@ class Ball {
         h %= 1;
         
         this.colour = this.generateColour(h, 0.5, 0.95);
-
-        // this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
     }
     setBallArray(ballArray) {
         this.ballArray = ballArray;
