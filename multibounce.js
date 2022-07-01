@@ -1,8 +1,8 @@
-var NO_OF_BALLS = 360;
+var NO_OF_BALLS = 250;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 var BALL_MIN_SIZE = 5;
-var BALL_MAX_SIZE = 40;
+var BALL_MAX_SIZE = 90;
 var CURSOR_BALL = false;
 
 var ballArray = [];
@@ -73,7 +73,6 @@ function draw() {
         // rect(ballArray[i].getX() - (ballArray[i].getI() / 2), ballArray[i].getY() - (ballArray[i].getJ() / 2), ballArray[i].getI(), ballArray[i].getJ());
 
         if (CURSOR_BALL) {
-            // ballArray[ballArray.length - 1].animateBall();
             ballArray[ballArray.length - 1].setX(mouseX);
             ballArray[ballArray.length - 1].setY(mouseY);
             ellipse(mouseX, mouseY, 40, 40);

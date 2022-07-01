@@ -136,7 +136,7 @@ class Ball {
         h += goldenRatioConjugate;
         h %= 1;
         
-        this.colour = this.generateColour(h, 0.5, 0.95);
+        this.colour = this.generateColour(h, 0.55, 0.95);
     }
     setBallArray(ballArray) {
         this.ballArray = ballArray;
