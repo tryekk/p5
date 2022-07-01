@@ -52,14 +52,6 @@ class Ball {
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    
-                    // if (
-                    //     (this.x - this.ballArray[i].getX()) - (this.y - this.ballArray[i].getY()) <= 15 &&
-                    //     (this.x - this.ballArray[i].getX()) - (this.y - this.ballArray[i].getY()) >= -15
-                    // ) {
-                    //     this.onBounce();
-                    // }
-
                     // Calculate distance of balls (each radius plus the other)
                     if (
                         ((this.x - this.ballArray[i].getX()) <= ((this.i / 2) + (this.ballArray[i].getI() / 2))
