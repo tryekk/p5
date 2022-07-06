@@ -4,6 +4,7 @@ var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 var BALL_MIN_SIZE = 5;
 var BALL_MAX_SIZE = 70;
 var CURSOR_BALL = false;
+var SHAPE = "circle";
 
 var ballArray = [];
 
@@ -31,7 +32,8 @@ function setup() {
             y[i],
             ballSize,
             ballSize,
-            random(0.01,0.5),
+            SHAPE,
+            random(0.01, 0.5),
             random(0.01, 0.5),
             true,
             COLLISIONS,
@@ -49,6 +51,7 @@ function setup() {
             mouseY,
             40,
             40,
+            SHAPE,
             0,
             0,
             false,

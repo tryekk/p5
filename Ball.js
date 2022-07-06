@@ -1,10 +1,12 @@
 class Ball {
-    constructor(x, y, i, j, xSpeed, ySpeed, animate, collide, ballIndex) {
+    constructor(x, y, i, j, shape, xSpeed, ySpeed, animate, collide, ballIndex) {
         this.x = x;
         this.y = y;
 
         this.i = i;
         this.j = j;
+
+        this.shape = shape;
 
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -52,33 +54,47 @@ class Ball {
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    let distanceBetweenCirclesSquared = 
+                    if (this.shape == "circle") {
+                        let distanceBetweenCirclesSquared = 
                         (this.ballArray[i].getX() - this.x) * (this.ballArray[i].getX() - this.x) + 
                         (this.ballArray[i].getY() - this.y) * (this.ballArray[i].getY() - this.y);
-                    if (
-                        distanceBetweenCirclesSquared <
-                        ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
-                    ) {
-                        // Prevent sticking
-                        this.x = this.x - this.xDir;
-                        this.y = this.y - this.yDir;
-
-                        // Invert direction
-                        if (this.xDir > 0) {
-                            this.xDir = this.xDir - (this.xDir * 2);
-                        } else {
-                            this.xDir = this.xSpeed;
+                        if (
+                            distanceBetweenCirclesSquared <=
+                            ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
+                        ) {
+                            this.onCollision();
                         }
-                        if (this.yDir > 0) {
-                            this.yDir = this.yDir - (this.yDir * 2);
-                        } else {
-                            this.yDir = this.ySpeed;
+                    } else {
+                        if (
+                            ((this.x - this.ballArray[i].getX()) <= ((this.i / 2) + (this.ballArray[i].getI() / 2))
+                            && (this.x - this.ballArray[i].getX()) >= -((this.i / 2) + (this.ballArray[i].getI() / 2))) &&
+                            ((this.y - this.ballArray[i].getY()) <= ((this.j / 2) + (this.ballArray[i].getJ() / 2))
+                            && (this.y - this.ballArray[i].getY()) >= -((this.j / 2) + (this.ballArray[i].getJ() / 2)))
+                        ) {
+                            this.onCollision();
                         }
-                        this.onBounce();
                     }
                 } 
             }
         }
+    }
+    onCollision() {
+        // Prevent sticking
+        this.x = this.x - this.xDir;
+        this.y = this.y - this.yDir;
+
+        // Invert direction
+        if (this.xDir > 0) {
+            this.xDir = this.xDir - (this.xDir * 2);
+        } else {
+            this.xDir = this.xSpeed;
+        }
+        if (this.yDir > 0) {
+            this.yDir = this.yDir - (this.yDir * 2);
+        } else {
+            this.yDir = this.ySpeed;
+        }
+        this.onBounce();
     }
     generateColour(h, s, v) {
         let h_i = parseInt(h * 6);
