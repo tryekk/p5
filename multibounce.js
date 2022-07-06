@@ -1,8 +1,8 @@
-var NO_OF_BALLS = 250;
+var NO_OF_BALLS = 160;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 var BALL_MIN_SIZE = 5;
-var BALL_MAX_SIZE = 90;
+var BALL_MAX_SIZE = 70;
 var CURSOR_BALL = false;
 
 var ballArray = [];
@@ -31,8 +31,8 @@ function setup() {
             y[i],
             ballSize,
             ballSize,
-            random(0.1, 1),
-            random(0.1, 1),
+            random(0.01,0.5),
+            random(0.01, 0.5),
             true,
             COLLISIONS,
             i)

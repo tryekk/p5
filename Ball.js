@@ -52,12 +52,12 @@ class Ball {
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
                 if (i != this.ballIndex) {
-                    // Calculate distance of balls (each radius plus the other)
+                    let distanceBetweenCirclesSquared = 
+                        (this.ballArray[i].getX() - this.x) * (this.ballArray[i].getX() - this.x) + 
+                        (this.ballArray[i].getY() - this.y) * (this.ballArray[i].getY() - this.y);
                     if (
-                        ((this.x - this.ballArray[i].getX()) <= ((this.i / 2) + (this.ballArray[i].getI() / 2))
-                        && (this.x - this.ballArray[i].getX()) >= -((this.i / 2) + (this.ballArray[i].getI() / 2))) &&
-                        ((this.y - this.ballArray[i].getY()) <= ((this.j / 2) + (this.ballArray[i].getJ() / 2))
-                        && (this.y - this.ballArray[i].getY()) >= -((this.j / 2) + (this.ballArray[i].getJ() / 2)))
+                        distanceBetweenCirclesSquared <
+                        ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
                     ) {
                         // Prevent sticking
                         this.x = this.x - this.xDir;
