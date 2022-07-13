@@ -1,4 +1,4 @@
-var NO_OF_BALLS = 160;
+var NO_OF_BALLS = 64;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 var BALL_MIN_SIZE = 5;

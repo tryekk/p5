@@ -63,8 +63,7 @@ class Ball {
                             ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
                         ) {
                             // Prevent sticking
-                            this.x = this.x - this.xDir;
-                            this.y = this.y - this.yDir;
+                            // TODO
 
                             // Calculate vector perpendicular to tangeant of collision
                             let tangentVector = new THREE.Vector2(0, 0);
