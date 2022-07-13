@@ -22,7 +22,7 @@ function setup() {
 };
 
 function draw() {
-  // background(255);
+  background(255);
   // If it's time for a new point
   if (millis() > next && painting) {
     // Get mouse position

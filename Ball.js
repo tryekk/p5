@@ -62,7 +62,50 @@ class Ball {
                             distanceBetweenCirclesSquared <=
                             ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
                         ) {
-                            this.onCollision();
+                            // Prevent sticking
+                            this.x = this.x - this.xDir;
+                            this.y = this.y - this.yDir;
+
+                            // Calculate vector perpendicular to tangeant of collision
+                            let tangentVector = new THREE.Vector2(0, 0);
+                            tangentVector.y = -(this.ballArray[i].getX() - this.x);
+                            tangentVector.x = this.ballArray[i].getY() - this.y;
+                            // Normalise
+                            tangentVector.normalize();
+                            
+                            // Calculate relative velocity to other object
+                            let relativeVelocity = 
+                            new THREE.Vector2(this.ballArray[i].getXDir() - this.xDir, 
+                            this.ballArray[i].getYDir() - this.yDir);
+
+                            // Velocity vector parallel to tangeant
+                            let length = new THREE.Vector2(0, 0);
+                            relativeVelocity.dot(tangentVector);
+                            length.x = relativeVelocity.getComponent(0);
+                            length.y = relativeVelocity.getComponent(1);
+                            let velocityComponentOnTangent = new THREE.Vector2(0, 0);
+                            tangentVector.multiply(length);
+                            velocityComponentOnTangent.x = tangentVector.getComponent(0);
+                            velocityComponentOnTangent.y = tangentVector.getComponent(1);
+                            
+                            // Velocity vector perpendicular to tangeant
+                            let velocityComponentPerpendicularToTangent = new THREE.Vector2(0, 0);
+                            relativeVelocity.sub(velocityComponentOnTangent);
+                            velocityComponentPerpendicularToTangent.x = relativeVelocity.getComponent(0);
+                            velocityComponentPerpendicularToTangent.y = relativeVelocity.getComponent(1);
+
+                            velocityComponentPerpendicularToTangent.normalize();
+                            
+                            // Bounce
+                            this.xDir = this.xDir - velocityComponentPerpendicularToTangent.getComponent(0);
+                            this.yDir = this.yDir - velocityComponentPerpendicularToTangent.getComponent(1);
+
+                            console.log(velocityComponentPerpendicularToTangent.getComponent(0));
+
+                            this.ballArray[i].setXDir(this.ballArray[i].getXDir() - velocityComponentPerpendicularToTangent.getComponent(0));
+                            this.ballArray[i].setYDir(this.ballArray[i].getYDir() - velocityComponentPerpendicularToTangent.getComponent(1));
+
+                            this.onBounce();
                         }
                     } else {
                         if (
@@ -78,11 +121,10 @@ class Ball {
             }
         }
     }
+    normaliseValue(val, max, min) {
+        return parseFloat((val - min) / (max - min));
+    }
     onCollision() {
-        // Prevent sticking
-        this.x = this.x - this.xDir;
-        this.y = this.y - this.yDir;
-
         // Invert direction
         if (this.xDir > 0) {
             this.xDir = this.xDir - (this.xDir * 2);
@@ -164,6 +206,18 @@ class Ball {
     }
     getY() {
         return this.y;
+    }
+    setXDir(xDir) {
+        this.xDir = xDir;
+    }
+    setYDir(yDir) {
+        this.yDir = yDir;
+    }
+    getXDir() {
+        return this.xDir;
+    }
+    getYDir() {
+        return this.yDir;
     }
     getI() {
         return this.i;

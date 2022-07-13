@@ -2,7 +2,7 @@ var NO_OF_BALLS = 160;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
 var BALL_MIN_SIZE = 5;
-var BALL_MAX_SIZE = 70;
+var BALL_MAX_SIZE = 60;
 var CURSOR_BALL = false;
 var SHAPE = "circle";
 
