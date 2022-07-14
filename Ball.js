@@ -63,7 +63,17 @@ class Ball {
                             ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
                         ) {
                             // Prevent sticking
-                            // TODO
+                            let angle = Math.atan2(this.ballArray[i].getY() - this.y, this.ballArray[i].getX() - this.x);
+
+                            let distanceBetweenCircles = 
+                                Math.sqrt(
+                                    (this.ballArray[i].getX() - this.x) * (this.ballArray[i].getX() - this.x) + 
+                                    (this.ballArray[i].getY() - this.y) * (this.ballArray[i].getY() - this.y)
+                                );
+                            let distanceToMove = ((this.i/2) + (this.ballArray[i].getI()/2)) - distanceBetweenCircles;
+
+                            this.ballArray[i].setX(this.ballArray[i].getX() + (Math.cos(angle) * distanceToMove));
+                            this.ballArray[i].setY(this.ballArray[i].getY() + (Math.sin(angle) * distanceToMove));
 
                             // Calculate vector perpendicular to tangeant of collision
                             let tangentVector = new THREE.Vector2(0, 0);
@@ -93,13 +103,11 @@ class Ball {
                             velocityComponentPerpendicularToTangent.x = relativeVelocity.getComponent(0);
                             velocityComponentPerpendicularToTangent.y = relativeVelocity.getComponent(1);
 
-                            velocityComponentPerpendicularToTangent.normalize();
+                            // velocityComponentPerpendicularToTangent.normalize();
                             
                             // Bounce
                             this.xDir = this.xDir - velocityComponentPerpendicularToTangent.getComponent(0);
                             this.yDir = this.yDir - velocityComponentPerpendicularToTangent.getComponent(1);
-
-                            console.log(velocityComponentPerpendicularToTangent.getComponent(0));
 
                             this.ballArray[i].setXDir(this.ballArray[i].getXDir() - velocityComponentPerpendicularToTangent.getComponent(0));
                             this.ballArray[i].setYDir(this.ballArray[i].getYDir() - velocityComponentPerpendicularToTangent.getComponent(1));
