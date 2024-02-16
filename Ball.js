@@ -21,7 +21,10 @@ class Ball {
         this.yDir = ySpeed;
 
         this.colour = [Math.random()*256, Math.random()*256, Math.random()*256];
+
+        this.ballCollidedWith = null;
     }
+
     animateBall() {
         if (this.animate) {
             this.x = this.x + this.xDir;
@@ -53,7 +56,7 @@ class Ball {
 
         if (this.collide) {
             for (let i = 0; i < this.ballArray.length; i++) {
-                if (i != this.ballIndex) {
+                if (i != this.ballIndex || this.ballArray[i].ballCollidedWith != this.ballIndex) {  // for all the other balls, and not if the ball has been collided with already
                     if (this.shape == "circle") {
                         let distanceBetweenCirclesSquared = 
                         (this.ballArray[i].getX() - this.x) * (this.ballArray[i].getX() - this.x) + 
@@ -62,57 +65,7 @@ class Ball {
                             distanceBetweenCirclesSquared <=
                             ((this.i/2) + (this.ballArray[i].getI()/2)) * ((this.i/2) + (this.ballArray[i].getI()/2))
                         ) {
-                            // Prevent sticking
-                            let angle = Math.atan2(this.ballArray[i].getY() - this.y, this.ballArray[i].getX() - this.x);
-
-                            let distanceBetweenCircles = 
-                                Math.sqrt(
-                                    (this.ballArray[i].getX() - this.x) * (this.ballArray[i].getX() - this.x) + 
-                                    (this.ballArray[i].getY() - this.y) * (this.ballArray[i].getY() - this.y)
-                                );
-                            let distanceToMove = ((this.i/2) + (this.ballArray[i].getI()/2)) - distanceBetweenCircles;
-
-                            this.ballArray[i].setX(this.ballArray[i].getX() + (Math.cos(angle) * distanceToMove));
-                            this.ballArray[i].setY(this.ballArray[i].getY() + (Math.sin(angle) * distanceToMove));
-
-                            // Calculate vector perpendicular to tangeant of collision
-                            let tangentVector = new THREE.Vector2(0, 0);
-                            tangentVector.y = -(this.ballArray[i].getX() - this.x);
-                            tangentVector.x = this.ballArray[i].getY() - this.y;
-                            // Normalise
-                            tangentVector.normalize();
-                            
-                            // Calculate relative velocity to other object
-                            let relativeVelocity = 
-                            new THREE.Vector2(this.ballArray[i].getXDir() - this.xDir, 
-                            this.ballArray[i].getYDir() - this.yDir);
-
-                            // Velocity vector parallel to tangeant
-                            let length = new THREE.Vector2(0, 0);
-                            relativeVelocity.dot(tangentVector);
-                            length.x = relativeVelocity.getComponent(0);
-                            length.y = relativeVelocity.getComponent(1);
-                            let velocityComponentOnTangent = new THREE.Vector2(0, 0);
-                            tangentVector.multiply(length);
-                            velocityComponentOnTangent.x = tangentVector.getComponent(0);
-                            velocityComponentOnTangent.y = tangentVector.getComponent(1);
-                            
-                            // Velocity vector perpendicular to tangeant
-                            let velocityComponentPerpendicularToTangent = new THREE.Vector2(0, 0);
-                            relativeVelocity.sub(velocityComponentOnTangent);
-                            velocityComponentPerpendicularToTangent.x = relativeVelocity.getComponent(0);
-                            velocityComponentPerpendicularToTangent.y = relativeVelocity.getComponent(1);
-
-                            // velocityComponentPerpendicularToTangent.normalize();
-                            
-                            // Bounce
-                            this.xDir = this.xDir - velocityComponentPerpendicularToTangent.getComponent(0);
-                            this.yDir = this.yDir - velocityComponentPerpendicularToTangent.getComponent(1);
-
-                            this.ballArray[i].setXDir(this.ballArray[i].getXDir() - velocityComponentPerpendicularToTangent.getComponent(0));
-                            this.ballArray[i].setYDir(this.ballArray[i].getYDir() - velocityComponentPerpendicularToTangent.getComponent(1));
-
-                            this.onBounce();
+                            this.onCollision(this.ballArray[i]);
                         }
                     } else {
                         if (
@@ -128,23 +81,31 @@ class Ball {
             }
         }
     }
-    normaliseValue(val, max, min) {
-        return parseFloat((val - min) / (max - min));
-    }
-    onCollision() {
-        // Invert direction
-        if (this.xDir > 0) {
-            this.xDir = this.xDir - (this.xDir * 2);
-        } else {
-            this.xDir = this.xSpeed;
-        }
-        if (this.yDir > 0) {
-            this.yDir = this.yDir - (this.yDir * 2);
-        } else {
-            this.yDir = this.ySpeed;
-        }
+
+    onCollision(otherBall) {
+        // Prevent sticking
+        this.x = this.x - this.xDir;
+        this.y = this.y - this.yDir;
+
+        // Get the attributes from the ball that was collided with and transfer them to this ball
+        // Transfer the attriutes from this ball to the ball that was collided with
+        // (swapping energies or energy transfer)
+
+        var tempxDir = otherBall.xDir;
+        var tempyDir = otherBall.yDir;
+
+        otherBall.xDir = this.xDir;
+        otherBall.yDir = this.yDir;
+
+        this.xDir = tempxDir;
+        this.yDir = tempyDir;
+
+        otherBall.setBallCollidedWith(otherBall.ballIndex);
+        this.setBallCollidedWith(this.ballIndex);  // Clear ball collided with
+
         this.onBounce();
     }
+
     generateColour(h, s, v) {
         let h_i = parseInt(h * 6);
         let f = h * 6 - h_i;
@@ -187,6 +148,7 @@ class Ball {
 
         return [(r * 256), (g * 256), (b * 256)];
     }
+
     onBounce() {
         let goldenRatioConjugate = 0.618033988749895;
         let h = random(0, 1);
@@ -195,43 +157,48 @@ class Ball {
         
         this.colour = this.generateColour(h, 0.55, 0.95);
     }
+
     setBallArray(ballArray) {
         this.ballArray = ballArray;
     }
+
     setSpawnPosition(x, y) {
         this.x = x;
         this.y = y;
     }
+
     setX(x) {
         this.x = x;
     }
+
     setY(y) {
         this.y = y;
     }
+
+    setBallCollidedWith(ball) {
+        this.ballCollidedWith = ball;
+    }
+
+    getBallCollidedWith() {
+        return this.ballCollidedWith;
+    }
+
     getX() {
         return this.x;
     }
+
     getY() {
         return this.y;
     }
-    setXDir(xDir) {
-        this.xDir = xDir;
-    }
-    setYDir(yDir) {
-        this.yDir = yDir;
-    }
-    getXDir() {
-        return this.xDir;
-    }
-    getYDir() {
-        return this.yDir;
-    }
+
     getI() {
         return this.i;
     }
+
     getJ() {
         return this.j;
     }
+
     getColour() {
         return this.colour;
     }

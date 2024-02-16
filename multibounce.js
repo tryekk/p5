@@ -1,8 +1,10 @@
-var NO_OF_BALLS = 64;
+var NO_OF_BALLS = 180;
 var COLLISIONS = true;
 var colour = [Math.random()*256, Math.random()*256, Math.random()*256];
-var BALL_MIN_SIZE = 5;
+var BALL_MIN_SIZE = 30;
 var BALL_MAX_SIZE = 60;
+var MIN_SPEED = 0.01;
+var MAX_SPEED = 2.0;
 var CURSOR_BALL = false;
 var SHAPE = "circle";
 
@@ -33,16 +35,18 @@ function setup() {
             ballSize,
             ballSize,
             SHAPE,
-            random(0.01, 0.5),
-            random(0.01, 0.5),
+            random(MIN_SPEED, MAX_SPEED),
+            random(MIN_SPEED, MAX_SPEED),
             true,
             COLLISIONS,
             i)
         );
     }
 
+    // Potential improvement is to store the ball array outside of the Ball classes
+    // Then each ball can access this array from one place
     for (let i = 0; i < NO_OF_BALLS; i++) {
-        ballArray[i].setBallArray(ballArray); 
+        ballArray[i].setBallArray(ballArray);
     }
 
     if (CURSOR_BALL) {
